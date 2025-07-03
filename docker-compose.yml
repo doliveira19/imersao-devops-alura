@@ -1,0 +1,17 @@
+services:
+  app:
+    # Constrói a imagem a partir do Dockerfile no diretório atual
+    build: .
+    # Define um nome e tag para a imagem que será construída
+    image: api-escola-imersao-devops
+    # Define um nome fixo para o contêiner
+    container_name: api-escola-imersao-devops-app
+    # Mapeia a porta 8000 do host para a porta 8000 do container
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual do host no diretório /app do container
+    # Isso permite o hot-reload: alterações no seu código local refletem imediatamente no container
+    volumes:
+      - .:/app
+    # Comando para iniciar a aplicação com Uvicorn, habilitando o reload automático
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
